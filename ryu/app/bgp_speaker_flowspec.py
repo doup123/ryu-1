@@ -40,7 +40,8 @@ while True:
         {'dst_prefix': '10.60.1.0/24'},
         actions=
         {'traffic_rate':
-             {'Rate information': 0}}
+             { 'as_number' : 64512 ,
+              'rate_info': 0}}
 
     )
     print "-----"
