@@ -39,7 +39,8 @@ while True:
         rules=
         {'dst_prefix': '10.60.1.0/24'},
         actions=
-        {'traffic_rate': '0'}
+        {'traffic_rate':
+             {'Rate information': 0}}
 
     )
     print "-----"
