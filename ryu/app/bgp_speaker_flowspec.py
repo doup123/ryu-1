@@ -25,7 +25,7 @@ speaker = BGPSpeaker(as_number=64512, router_id='10.0.0.1',
                      best_path_change_handler=dump_remote_best_path_change,
                      peer_down_handler=detect_peer_down)
 
-speaker.neighbor_add(address='147.102.13.198', remote_as=64513,enable_ipv4fs=True)
+speaker.neighbor_add(address='147.102.13.199', remote_as=64513,enable_ipv4fs=True)
 
 # uncomment the below line if the speaker needs to talk with a bmp server.
 # speaker.bmp_server_add('192.168.177.2', 11019)
