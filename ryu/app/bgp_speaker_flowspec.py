@@ -20,29 +20,29 @@ def dump_remote_best_path_change(event):
 def detect_peer_down(remote_ip, remote_as):
     print 'Peer down:', remote_ip, remote_as
 
-if __name__ == "__main__":
-    speaker = BGPSpeaker(as_number=64512, router_id='10.0.0.1',
-                         best_path_change_handler=dump_remote_best_path_change,
-                         peer_down_handler=detect_peer_down)
 
-    speaker.neighbor_add(address='147.102.13.198', remote_as=64513)
+speaker = BGPSpeaker(as_number=64512, router_id='10.0.0.1',
+                     best_path_change_handler=dump_remote_best_path_change,
+                     peer_down_handler=detect_peer_down)
 
-    # uncomment the below line if the speaker needs to talk with a bmp server.
-    # speaker.bmp_server_add('192.168.177.2', 11019)
-    count = 1
-    while True:
-        eventlet.sleep(30)
-        prefix = '10.20.' + str(count) + '.0/24'
-        print "add a new prefix", prefix
-        speaker.flowspec_prefix_add(
-            flowspec_family='ipv4fs',
-            rules=
-            {'dst_prefix': '10.60.1.0/24'},
-            actions=
-            {'traffic_rate': 0}
+speaker.neighbor_add(address='147.102.13.198', remote_as=64513)
 
-        )
-        count += 1
-        if count == 4:
-            speaker.shutdown()
-            break
+# uncomment the below line if the speaker needs to talk with a bmp server.
+# speaker.bmp_server_add('192.168.177.2', 11019)
+count = 1
+while True:
+    eventlet.sleep(30)
+    prefix = '10.20.' + str(count) + '.0/24'
+    print "add a new prefix", prefix
+    speaker.flowspec_prefix_add(
+        flowspec_family='ipv4fs',
+        rules=
+        {'dst_prefix': '10.60.1.0/24'},
+        actions=
+        {'traffic_rate': 0}
+
+    )
+    count += 1
+    if count == 4:
+        speaker.shutdown()
+        break
