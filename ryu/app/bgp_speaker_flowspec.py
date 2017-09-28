@@ -21,11 +21,11 @@ def detect_peer_down(remote_ip, remote_as):
     print 'Peer down:', remote_ip, remote_as
 
 
-speaker = BGPSpeaker(as_number=64512, router_id='10.0.0.1',
+speaker = BGPSpeaker(as_number=1000, router_id='10.0.0.1',
                      best_path_change_handler=dump_remote_best_path_change,
                      peer_down_handler=detect_peer_down)
 
-speaker.neighbor_add(address='147.102.13.199', remote_as=64513,enable_ipv4fs=True)
+speaker.neighbor_add('147.102.13.156',1000,enable_ipv4fs=True)
 
 # uncomment the below line if the speaker needs to talk with a bmp server.
 # speaker.bmp_server_add('192.168.177.2', 11019)
@@ -37,7 +37,7 @@ while True:
     speaker.flowspec_prefix_add(
         flowspec_family='ipv4fs',
         rules=
-        {'dst_prefix': '10.60.1.0/24'},
+        {'dst_prefix': '147.102.13.199/32'},
         actions=
         {'traffic_rate':
              { 'as_number' : 64512 ,
@@ -45,7 +45,7 @@ while True:
 
     )
     print "-----"
-    print speaker.attribute_map_get(address='147.102.13.199',route_family='ipv4fs' )
+    print speaker.attribute_map_get(address='147.102.13.156',route_family='ipv4fs' )
     print "-----"
     count += 1
     if count == 4:
