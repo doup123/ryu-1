@@ -45,7 +45,7 @@ while True:
         rules=
         {'dst_prefix': '172.16.1.3/32'},
         actions=
-        {'traffic_rate':
+        {'traffic_marking':
              { 'dscp': 24}}
 
     )
