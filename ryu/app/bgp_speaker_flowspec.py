@@ -36,12 +36,17 @@ while True:
     print "add a new prefix", prefix
     speaker.flowspec_prefix_add(
         flowspec_family='ipv4fs',
+        # rules=
+        # {'dst_prefix': '147.102.13.199/32'},
+        # actions=
+        # {'traffic_rate':
+        #      { 'as_number' : 64512 ,
+        #       'rate_info': 0}}
         rules=
-        {'dst_prefix': '147.102.13.199/32'},
+        {'dst_prefix': '172.16.1.3/32'},
         actions=
         {'traffic_rate':
-             { 'as_number' : 64512 ,
-              'rate_info': 0}}
+             { 'dscp': 24}}
 
     )
     print "-----"
