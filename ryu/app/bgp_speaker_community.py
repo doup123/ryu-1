@@ -50,7 +50,7 @@ while True:
     print "-----"
     count += 1
     if count == 2:
-        speaker.prefix_del("147.102.99.0/24")
+        speaker.prefix_del("147.102.99.0/25")
     if count == 4:
         speaker.shutdown()
         break
