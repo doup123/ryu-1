@@ -40,6 +40,7 @@ while True:
     prefix = '10.20.' + str(count) + '.0/24'
     print "add a new prefix", prefix
     speaker.prefix_add("147.102.99.0/24")
+    speaker.prefix_add("94.21.31.0/28")
         # {'dst_prefix': '172.16.1.3/32'},
         # actions=
         # {'traffic_marking':
