@@ -39,8 +39,8 @@ while True:
     eventlet.sleep(30)
     prefix = '10.20.' + str(count) + '.0/24'
     print "add a new prefix", prefix
-    speaker.prefix_add("147.102.99.0/24")
-    speaker.prefix_add("94.21.31.0/28")
+    speaker.prefix_add("147.102.99.0/25")
+    speaker.prefix_add("147.102.99.128/25")
         # {'dst_prefix': '172.16.1.3/32'},
         # actions=
         # {'traffic_marking':
@@ -49,6 +49,8 @@ while True:
     print "-----"
     print "-----"
     count += 1
+    if count == 2:
+        speaker.prefix_del("147.102.99.0/24")
     if count == 4:
         speaker.shutdown()
         break
