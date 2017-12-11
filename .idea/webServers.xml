@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="91e59a15-d553-46c4-85a9-47afa250fabb" name="147.102.13.198" url="http://147.102.13.198">
-        <fileTransfer host="147.102.13.198" port="22" privateKey="C:\Users\marinos\Desktop\miti.ppk" rootFolder="/root" accessType="SFTP" keyPair="true">
+        <fileTransfer host="147.102.13.198" port="22" privateKey="Z:\Keys\id_rsa" rootFolder="/root" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
