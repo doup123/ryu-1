@@ -1,6 +1,6 @@
 What's Ryu
 ==========
-yu is a component-based software defined networking framework.
+Ryu is a component-based software defined networking framework.
 
 Ryu provides software components with well defined API that make it
 easy for developers to create new network management and control
