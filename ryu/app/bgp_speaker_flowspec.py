@@ -40,7 +40,7 @@ while True:
         {'src_prefix': '147.102.13.202/32'},
         actions=
         {'traffic_rate':
-             { 'as_number' : 1000 ,
+             {
               'rate_info': 0}}
         # rules=
         # {'dst_prefix': '172.16.1.3/32'},
@@ -54,5 +54,7 @@ while True:
     print "-----"
     count += 1
     if count == 4:
+        speaker.prefix_del()
+        eventlet.sleep(30)
         speaker.shutdown()
         break
