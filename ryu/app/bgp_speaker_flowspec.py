@@ -34,14 +34,13 @@ speaker.neighbor_add('147.102.13.156',1000,enable_ipv4fs=True)
 #                                      AttributeMap.ATTR_LOCAL_PREF, 250)
 # speaker.prefix_del()
 #speaker.attribute_map_set("147.102.13.156",attribute_maps=attribute_map)
-malicious_ips=lst = ["147.102."+str(j)+"."+str(k) for j in range(1,101) for k in range(1,101)]
+malicious_ips=lst = ["147.102."+str(j)+"."+str(k)+"/32" for j in range(1,101) for k in range(1,101)]
 from time import time
 list=[]
 dic={}
 count = 1
 while True:
     eventlet.sleep(30)
-
     for k in range(1,10):
         x = time()
         dic[k]=[]
@@ -65,5 +64,5 @@ while True:
     if count == 1:
 
         speaker.shutdown()
-        print list
+        print dic
         break
