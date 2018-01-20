@@ -40,8 +40,7 @@ while True:
         {'src_prefix': '147.102.13.199/32'},
         actions=
         {'traffic_rate':
-             { 'as_number' : 1000 ,
-              'rate_info': 0}}
+             {'rate_info': 0}}
         # rules=
         # {'dst_prefix': '172.16.1.3/32'},
         # actions=
@@ -49,9 +48,6 @@ while True:
         #      { 'dscp': 24}}
 
     )
-    print "-----"
-    print speaker.attribute_map_get(address='147.102.13.156',route_family='ipv4fs' )
-    print "-----"
     count += 1
     if count == 4:
         speaker.shutdown()
