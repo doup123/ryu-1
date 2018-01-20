@@ -34,30 +34,35 @@ speaker.neighbor_add('147.102.13.156',1000,enable_ipv4fs=True)
 #                                      AttributeMap.ATTR_LOCAL_PREF, 250)
 # speaker.prefix_del()
 #speaker.attribute_map_set("147.102.13.156",attribute_maps=attribute_map)
+malicious_ips=lst = ["147.102."+str(j)+"."+str(k) for j in range(1,101) for k in range(1,101)]
 from time import time
 list=[]
+dic={}
 count = 1
 while True:
     eventlet.sleep(30)
-    x=time()
-    for i in range(1, 99):
-        speaker.flowspec_prefix_add(
-            flowspec_family='ipv4fs',
-            rules=
-            {'src_prefix': '147.102.12.' + str(i) + '/32'},
-            actions=
-            {'traffic_rate':
-                {'as_number':1000,'rate_info': 0}})
-    # {'dst_prefix': '172.16.1.3/32'},
-        # actions=
-        # {'traffic_marking':
-        #      { 'dscp': 24}}
-    y=time()
-    list.append(y-x)
+
+    for k in range(1,10):
+        x = time()
+        dic[k]=[]
+        end=k*100
+        for i in range(1, end):
+            speaker.flowspec_prefix_add(
+                flowspec_family='ipv4fs',
+                rules=
+                {'src_prefix': malicious_ips[i]},
+                actions=
+                {'traffic_rate':
+                    {'as_number':1000,'rate_info': 0}})
+        # {'dst_prefix': '172.16.1.3/32'},
+            # actions=
+            # {'traffic_marking':
+            #      { 'dscp': 24}}
+        y=time()
+        dic[k].append(y-x)
     print "-----"
-    print "-----"
-    count += 1
-    if count == 4:
+    eventlet.sleep(30)
+    if count == 1:
 
         speaker.shutdown()
         print list
