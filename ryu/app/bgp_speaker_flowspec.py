@@ -44,7 +44,7 @@ while True:
         speaker.flowspec_prefix_add(
             flowspec_family='ipv4fs',
             rules=
-            {'src_prefix': '147.102.13.' + str(i) + '/32'},
+            {'src_prefix': '147.102.12.' + str(i) + '/32'},
             actions=
             {'traffic_rate':
                 {'as_number':1000,'rate_info': 0}})
