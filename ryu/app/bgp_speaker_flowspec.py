@@ -38,6 +38,7 @@ from time import time
 list=[]
 count = 1
 while True:
+    eventlet.sleep(30)
     x=time()
     for i in range(1, 99):
         speaker.flowspec_prefix_add(
@@ -46,7 +47,7 @@ while True:
             {'src_prefix': '147.102.13.' + str(i) + '/32'},
             actions=
             {'traffic_rate':
-                {'rate_info': 0}})
+                {'as_number':1000,'rate_info': 0}})
     # {'dst_prefix': '172.16.1.3/32'},
         # actions=
         # {'traffic_marking':
