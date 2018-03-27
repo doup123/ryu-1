@@ -20,7 +20,7 @@ def detect_peer_down(remote_ip, remote_as):
     print 'Peer down:', remote_ip, remote_as
 
 
-speaker = BGPSpeaker(as_number=1000, router_id='10.0.0.1',
+speaker = BGPSpeaker(as_number=64512, router_id='10.0.0.1',
                      best_path_change_handler=dump_remote_best_path_change,
                      peer_down_handler=detect_peer_down)
 
@@ -43,7 +43,7 @@ while True:
         prefix = '10.20.' + str(i) + '.0/24'
         speaker.prefix_add(prefix, next_hop="192.0.2.1")
     end=time()
-    print(end-start)
+    #print(end-start)
     # print "add a new prefix", prefix
 
         # {'dst_prefix': '172.16.1.3/32'},
@@ -51,6 +51,8 @@ while True:
         # {'traffic_marking':
         #      { 'dscp': 24}}
     count += 1
+    eventlet.sleep(10)
     if count == 2:
+        print(end-start)
         speaker.shutdown()
         break
