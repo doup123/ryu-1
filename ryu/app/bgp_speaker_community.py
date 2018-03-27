@@ -20,12 +20,11 @@ def detect_peer_down(remote_ip, remote_as):
     print 'Peer down:', remote_ip, remote_as
 
 
-speaker = BGPSpeaker(as_number=64512, router_id='10.0.0.1',
+speaker = BGPSpeaker(as_number=64512, router_id='10.0.0.2',
                      best_path_change_handler=dump_remote_best_path_change,
                      peer_down_handler=detect_peer_down)
 
-speaker.neighbor_add('147.102.13.239',64512)
-
+speaker.neighbor_add("147.102.13.239",64512)
 # uncomment the below line if the speaker needs to talk with a bmp server.
 # speaker.bmp_server_add('192.168.177.2', 11019)
 # pref_filter = PrefixFilter('147.102.0.0/16',PrefixFilter.POLICY_PERMIT)
@@ -35,24 +34,29 @@ speaker.neighbor_add('147.102.13.239',64512)
 # speaker.prefix_del()
 #speaker.attribute_map_set("147.102.13.156",attribute_maps=attribute_map)
 from time import time
+from collections import OrderedDict
+random_generated_ips=["100.0."+str(i)+"."+str(j)+"/32" for i in range(250) for j in range(250)]
+Results=OrderedDict()
 count = 1
 while True:
     eventlet.sleep(30)
-    start=time()
-    for i in range(1,100):
-        prefix = '10.20.' + str(i) + '.0/24'
-        speaker.prefix_add(prefix, next_hop="192.0.2.1")
-    end=time()
-    #print(end-start)
-    # print "add a new prefix", prefix
+    for j in range(1,20):
+        eventlet.sleep(5)
+        start=time()
+        end_value=j*50
+        for i in range(1,end_value):
+            prefix=random_generated_ips[j*1000+i]
+            speaker.prefix_add(prefix)
+        end=time()
+        res=end_value
+        Results[res]=end-start
 
-        # {'dst_prefix': '172.16.1.3/32'},
-        # actions=
-        # {'traffic_marking':
-        #      { 'dscp': 24}}
     count += 1
     eventlet.sleep(10)
     if count == 2:
-        print(end-start)
         speaker.shutdown()
+        for key,value in Results.items():
+            value_formatted=str(value).replace(".",",")
+            print("%s %s"%(key,value_formatted))
+        print Results
         break
