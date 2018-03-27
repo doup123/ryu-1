@@ -24,7 +24,7 @@ speaker = BGPSpeaker(as_number=1000, router_id='10.0.0.1',
                      best_path_change_handler=dump_remote_best_path_change,
                      peer_down_handler=detect_peer_down)
 
-speaker.neighbor_add('147.102.13.156',1000)
+speaker.neighbor_add('147.102.13.239',64512)
 
 # uncomment the below line if the speaker needs to talk with a bmp server.
 # speaker.bmp_server_add('192.168.177.2', 11019)
@@ -34,23 +34,23 @@ speaker.neighbor_add('147.102.13.156',1000)
 #                                      AttributeMap.ATTR_LOCAL_PREF, 250)
 # speaker.prefix_del()
 #speaker.attribute_map_set("147.102.13.156",attribute_maps=attribute_map)
+from time import time
 count = 1
 while True:
     eventlet.sleep(30)
-    prefix = '10.20.' + str(count) + '.0/24'
-    print "add a new prefix", prefix
-    speaker.prefix_add("147.102.99.0/25")
-    speaker.prefix_add("147.102.99.128/25")
+    start=time()
+    for i in range(1,100):
+        prefix = '10.20.' + str(i) + '.0/24'
+        speaker.prefix_add(prefix, next_hop="192.0.2.1")
+    end=time()
+    print(end-start)
+    # print "add a new prefix", prefix
+
         # {'dst_prefix': '172.16.1.3/32'},
         # actions=
         # {'traffic_marking':
         #      { 'dscp': 24}}
-
-    print "-----"
-    print "-----"
     count += 1
     if count == 2:
-        speaker.prefix_del("147.102.99.0/25")
-    if count == 4:
         speaker.shutdown()
         break
